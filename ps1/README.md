@@ -26,6 +26,7 @@ octave reduceIntensity.m holy-animal.jpg 2
 ```
 ![](holy-animal_2.jpg)
 
+### blur
 ```sh
 octave blur.m holy-animal.jpg 3
 ```
