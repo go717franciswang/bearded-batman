@@ -57,3 +57,19 @@ octave blur.m holy-animal_rotated_45.jpg 3
 ```
 ![](holy-animal_rotated_45_blurred_3.jpg)
 
+### pixelize
+```sh
+octave pixelize.m holy-animal.jpg 3
+```
+![](holy-animal_pixelized_3.jpg)
+
+```sh
+octave pixelize.m holy-animal.jpg 9
+```
+![](holy-animal_pixelized_9.jpg)
+
+```sh
+octave pixelize.m holy-animal.jpg 27
+```
+![](holy-animal_pixelized_27.jpg)
+
