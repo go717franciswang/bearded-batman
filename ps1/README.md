@@ -41,3 +41,15 @@ octave blur.m holy-animal.jpg 10
 octave blur.m holy-animal.jpg 20
 ```
 ![](holy-animal_blurred_20.jpg)
+
+### rotate
+```sh
+octave rotate.m holy-animal.jpg 45
+```
+![](holy-animal_blurred_45.jpg)
+
+```sh
+octave rotate.m holy-animal.jpg 90
+```
+![](holy-animal_blurred_90.jpg)
+
