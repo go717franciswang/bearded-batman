@@ -44,12 +44,16 @@ octave blur.m holy-animal.jpg 20
 
 ### rotate
 ```sh
-octave rotate.m holy-animal.jpg 45
-```
-![](holy-animal_rotated_45.jpg)
-
-```sh
 octave rotate.m holy-animal.jpg 90
 ```
 ![](holy-animal_rotated_90.jpg)
+
+```sh
+octave rotate.m holy-animal.jpg 45
+```
+![](holy-animal_rotated_45.jpg)
+```sh
+octave blur.m holy-animal_rotated_45.jpg 3
+```
+![](holy-animal_rotated_45_blurred_3.jpg)
 
