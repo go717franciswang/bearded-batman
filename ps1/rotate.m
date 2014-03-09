@@ -1,17 +1,24 @@
 #! /usr/bin/octave -qf
 
-arg_list = argv();
-image_file_name = arg_list{1};
-degrees = str2num(arg_list{2});
-rad = degrees * pi / 180;
-M = [cos(rad) -sin(rad); sin(rad) cos(rad)];
-I = imread(image_file_name);
-[m, n, d] = size(I);
-center = round([n/2, m/2]);
+function M = rotation_matrix(rad)
+    M = [cos(rad) -sin(rad); sin(rad) cos(rad)];
+end
 
 function r = rotate(M, center, point)
     r = M * (point - center)' + center';
 end
+
+arg_list = argv();
+image_file_name = arg_list{1};
+degrees = str2num(arg_list{2});
+rad = degrees * pi / 180;
+
+M = rotation_matrix(rad);
+Minverse = rotation_matrix(-rad);
+
+I = imread(image_file_name);
+[m, n, d] = size(I);
+center = round([n/2, m/2]);
 
 % compute the new size of the rotated image
 %   compute new location of the 4 corners
@@ -34,27 +41,18 @@ height = ymax - ymin;
 
 J = ones(height, width, 3)*255;
 
-% iterate over every pixel by position
-for y = 1:m
-    for x = 1:n
-        colors = I(y,x,:);
-        % compute new position and copy the colors of this pixel to the new position (make sure to apply offset)
-        p = rotate(M, center, [x-1 y-1]) - [xmin; ymin] + [1; 1];
-        if p(1) <= 0
-            p(1) = 1;
+% iterate over every pixel of J by position
+for y = 1:height
+    for x = 1:width
+        % compute new position and copy the colors of this pixel to the new position 
+        % (make sure to apply offset)
+        p = rotate(Minverse, center, [x-1 y-1] + [xmin ymin]) + [1; 1];
+        if p(1) < 1 || p(2) < 1 || p(1) > n || p(2) > m
+            continue;
         end
-        if p(2) <= 0
-            p(2) = 1;
-        end
-        if p(1) > width
-            p(1) = width;
-        end
-        if p(2) > height
-            p(2) = height;
-        end
-
         p = round(p);
-        J(p(2), p(1), :) = colors;
+
+        J(y, x, :) = I(p(2), p(1), :); 
     end
 end
 

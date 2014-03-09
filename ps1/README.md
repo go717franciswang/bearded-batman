@@ -8,22 +8,13 @@ gnome-open holy-animal.jpg
 
 ```sh
 octave reduceIntensity.m holy-animal.jpg 16
-```
-![](holy-animal_16.jpg)
-
-```sh
 octave reduceIntensity.m holy-animal.jpg 8
-```
-![](holy-animal_8.jpg)
-
-```sh
 octave reduceIntensity.m holy-animal.jpg 4
-```
-![](holy-animal_4.jpg)
-
-```sh
 octave reduceIntensity.m holy-animal.jpg 2
 ```
+![](holy-animal_16.jpg)
+![](holy-animal_8.jpg)
+![](holy-animal_4.jpg)
 ![](holy-animal_2.jpg)
 
 ### blur
@@ -52,10 +43,6 @@ octave rotate.m holy-animal.jpg 90
 octave rotate.m holy-animal.jpg 45
 ```
 ![](holy-animal_rotated_45.jpg)
-```sh
-octave blur.m holy-animal_rotated_45.jpg 3
-```
-![](holy-animal_rotated_45_blurred_3.jpg)
 
 ### pixelize
 ```sh
