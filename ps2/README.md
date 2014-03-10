@@ -1,3 +1,8 @@
+### basic JPEG implementation
+```sh
+octave jpeg.m
+```
+
 ### dependencies
 * octave-signal
   * dct
