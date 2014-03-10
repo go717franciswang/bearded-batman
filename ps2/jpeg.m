@@ -1,4 +1,8 @@
-I = imread("grizzly.jpg");
+arg_list = argv();
+image_file_name = arg_list{1};
+multiplier = str2num(arg_list{2});
+
+I = imread(image_file_name);
 [m n d] = size(I);
 I = rgb2ycbcr(I);
 Q = [16 11 10 16 24 40 51 61;
@@ -9,6 +13,7 @@ Q = [16 11 10 16 24 40 51 61;
      24 35 55 64 81 104 113 92;
      49 64 78 87 103 121 120 101;
      72 92 95 98 112 100 103 99];
+Q *= multiplier;
 
 J = zeros(size(I));
 
@@ -40,6 +45,9 @@ end
 % visualize
 J = ycbcr2rgb(J);
 J = uint8(J);
-imshow(J);
-pause;
+% imshow(J);
+% pause;
 
+[dir, name, ext, ver] = fileparts(image_file_name);
+outname = sprintf("%s_jpeg_%0.2f%s", name, multiplier, ext);
+imwrite(J, outname);
