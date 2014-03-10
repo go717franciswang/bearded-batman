@@ -1,6 +1,6 @@
 #! /usr/bin/octave -qf
 
-I = imread('grizzly.jpg');
+I = imread("grizzly.jpg");
 [m n d] = size(I);
 I = rgb2ycbcr(I);
 Q = [16 11 10 16 24 40 51 61;
