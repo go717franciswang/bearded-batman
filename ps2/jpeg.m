@@ -1,5 +1,3 @@
-#! /usr/bin/octave -qf
-
 I = imread("grizzly.jpg");
 [m n d] = size(I);
 I = rgb2ycbcr(I);
@@ -44,7 +42,4 @@ J = ycbcr2rgb(J);
 J = uint8(J);
 imshow(J);
 pause;
-exit;
-
-size(J)
 
