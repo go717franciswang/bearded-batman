@@ -26,7 +26,7 @@ for k = 1:3
             B = I(i:i2, j:j2, k);
 
             % DCT
-            G = dct(B, 8);
+            G = dct2(B, 8, 8);
 
             % quantize
             B = round(G ./ Q);
@@ -35,7 +35,7 @@ for k = 1:3
             G2 = B .* Q;
 
             % invert DCT
-            B2 = round(idct(G2, 8));
+            B2 = round(idct2(G2, 8, 8));
 
             J(i:i2, j:j2, k) = B2;
         end
