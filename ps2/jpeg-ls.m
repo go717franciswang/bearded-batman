@@ -48,10 +48,7 @@ D1 = J1 - I;
 D2 = J2 - I;
 D3 = J3 - I;
 
-% D3(2:end, 2:end, 3);
-
 plot(I(:), I, "J0.png");
 plot(E1, D1, "J1.png");
 plot(E2, D2, "J2.png");
 plot(E3, D3, "J3.png");
-
