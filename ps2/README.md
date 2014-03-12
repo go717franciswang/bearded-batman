@@ -29,6 +29,17 @@ done
 ![](grizzly_jpeg_fft_32.00.jpg)
 ![](grizzly_jpeg_fft_64.00.jpg)
 
+### .. without any transformation
+```sh
+for i in 1 2 4
+do octave jpeg-just-quantization.m $i
+done
+```
+![](grizzly_jpeg_just_quantization_1.00.jpg)
+![](grizzly_jpeg_just_quantization_2.00.jpg)
+![](grizzly_jpeg_just_quantization_4.00.jpg)
+
+
 ### dependencies
 * octave-signal
   * dct
