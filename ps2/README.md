@@ -54,6 +54,22 @@ done
 ![](grizzly_jpeg_color_64.00.jpg)
 ![](grizzly_jpeg_color_128.00.jpg)
 
+### JPEG-LS
+```sh
+octave jpeg-ls.m
+```
+#### Original
+![](J0.png)
+
+#### Use (-1, 0)
+![](J1.png)
+
+#### Use (0, 1)
+![](J2.png)
+
+#### Use (-1, 0), (-1, 1), (0, 1)
+![](J3.png)
+
 ### dependencies
 * octave-signal
   * dct
