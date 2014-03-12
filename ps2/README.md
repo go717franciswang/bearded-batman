@@ -39,6 +39,20 @@ done
 ![](grizzly_jpeg_just_quantization_2.00.jpg)
 ![](grizzly_jpeg_just_quantization_4.00.jpg)
 
+### .. with DCT, constant quantization for Y-channel and more quantization for Cb and Cr
+```sh
+for i in 1 2 4 8 16 32 64 128
+do octave jpeg-colored.m $i
+done
+```
+![](grizzly_jpeg_just_color_1.00.jpg)
+![](grizzly_jpeg_just_color_2.00.jpg)
+![](grizzly_jpeg_just_color_4.00.jpg)
+![](grizzly_jpeg_just_color_8.00.jpg)
+![](grizzly_jpeg_just_color_16.00.jpg)
+![](grizzly_jpeg_just_color_32.00.jpg)
+![](grizzly_jpeg_just_color_64.00.jpg)
+![](grizzly_jpeg_just_color_128.00.jpg)
 
 ### dependencies
 * octave-signal
