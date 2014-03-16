@@ -9,3 +9,8 @@ octave histeq_demo
 octave immedian_demo 30 3
 ```
 ![](immedian_demo_30_3.jpg)
+
+```sh
+octave immedian_demo 60 6
+```
+![](immedian_demo_60_6.jpg)
