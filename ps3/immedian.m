@@ -1,6 +1,6 @@
 function J = immedian(I, box_size)
 
-s = (box_size-1) / 2;
+s = round((box_size-1) / 2);
 [m n d] = size(I);
 J = zeros(m,n,d);
 

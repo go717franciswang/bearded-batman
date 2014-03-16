@@ -20,7 +20,7 @@ imshow(R1);
 title(sprintf('#3 native immedian, size: %d', median_size));
 
 subplot(3,2,4);
-R2 = immedian(N, 3);
+R2 = immedian(N, median_size);
 imshow(R2);
 title(sprintf('#4 immedian2, size: %d', median_size));
 
