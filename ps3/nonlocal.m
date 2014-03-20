@@ -42,7 +42,6 @@ for i = 1:box_size:m
         % compare target window against windows with similar gray value
         window_columns = size(I, 2)-box_size+1;
         [height, width] = size(block); % block size might not be box_size x box_size near the edges
-        min_distance = height*width*err;
         avg_block = zeros(height, width);
         num_found = 0;
         for window_idx = idxes
@@ -50,10 +49,9 @@ for i = 1:box_size:m
             j3 = mod(window_idx-1, window_columns) + 1;
             block2 = double(I(i3:i3+height-1, j3:j3+width-1));
             distance = norm(block - block2, 2);
-            if distance <= min_distance
-                avg_block .+= block2;
-                num_found++;
-            end
+            weight = exp(-distance^2/err^2);
+            avg_block .+= block2*weight;
+            num_found += weight;
         end
 
         if num_found > 1
