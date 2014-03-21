@@ -1,5 +1,5 @@
-% arglist = argv();
-% box_size = str2num(arglist{1});
+arglist = argv();
+sigma = str2num(arglist{1});
 
 I = imread('jaguar-medium.jpg');
 subplot(3,2,1:2);
@@ -19,8 +19,6 @@ imshow(D1);
 title(sprintf('Noise, std: %0.2f', e1));
 
 search_width = 2;
-sigma = 35;
-%J = NLmeansfilter(N, 10, 3, 5);
 J = nonlocal(N, search_width, sigma);
 %J = nonlocal2(N, sigma);
 subplot(3,2,5);
