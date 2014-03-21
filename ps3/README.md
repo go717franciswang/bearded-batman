@@ -17,6 +17,6 @@ octave immedian_demo 60 6
 
 ### nonlocal means
 ```
-octave nonlocal_demo 30
+octave nonlocal_demo 35
 ```
-![](nonlocal_demo_30.jpg)
+![](nonlocal_demo_35.jpg)
