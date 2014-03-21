@@ -1,4 +1,30 @@
-function J = nonlocal(I, box_size, search_width, err)
+function J = nonlocal(I, search_width, sigma)
+
+I = double(I);
+
+if sigma <= 0 || sigma > 100
+    error('sigma must be within (0, 100]');
+elseif sigma <= 15
+    h = 0.4*sigma;
+    box_size = 3;
+    r = 10;
+elseif sigma <= 30
+    h = 0.4*sigma;
+    box_size = 5;
+    r = 10;
+elseif sigma <= 45
+    h = 0.35*sigma;
+    box_size = 7;
+    r = 17;
+elseif sigma <= 75
+    h = 0.35*sigma;
+    box_size = 9;
+    r = 17;
+else
+    h = 0.3*sigma;
+    box_size = 11;
+    r = 17;
+end
 
 % preprocess the image:
 % evaluate each sliding window of box_size and store the average gray value in an array
@@ -24,13 +50,14 @@ fflush(stdout);
 disp('Main..');
 fflush(stdout);
 J = zeros(size(I));
-for i = 1:box_size:m
+Estimated = zeros(size(I));
+for i = 1:m-box_size+1
     printf('row %d/%d..\n', i, m);
     fflush(stdout);
 
-    for j = 1:box_size:n
-        i2 = min(i+box_size-1, m);
-        j2 = min(j+box_size-1, n);
+    for j = 1:n-box_size+1
+        i2 = i+box_size-1;
+        j2 = j+box_size-1;
 
         % use lookup against sorted gray value to pull the original location of windows
         block = double(I(i:i2, j:j2, 1));
@@ -41,29 +68,34 @@ for i = 1:box_size:m
 
         % compare target window against windows with similar gray value
         window_columns = size(I, 2)-box_size+1;
-        [height, width] = size(block); % block size might not be box_size x box_size near the edges
-        avg_block = zeros(height, width);
+        avg_block = zeros(box_size, box_size);
         num_found = 0;
         for window_idx = idxes
             i3 = floor((window_idx-1)/window_columns) + 1;
             j3 = mod(window_idx-1, window_columns) + 1;
-            block2 = double(I(i3:i3+height-1, j3:j3+width-1));
-            distance = norm(block - block2, 2);
-            weight = exp(-distance^2/err^2);
-            avg_block .+= block2*weight;
+
+            if i3 < i-r || i3 > i+r || j3 < j-r || j3 > j+r
+                continue;
+            end
+
+            block2 = double(I(i3:i3+box_size-1, j3:j3+box_size-1, 1));
+            d2 = sum(((block - block2).^2)(:)) / box_size^2;
+            weight = exp(- max(d2-2*sigma^2, 0)/h^2);
+            avg_block += block2*weight;
             num_found += weight;
         end
 
         if num_found > 1
-            avg_block = round(avg_block / num_found);
+            avg_block = avg_block / num_found;
         else
             avg_block = block;
         end
 
-        J(i:i2, j:j2) = avg_block;
+        J(i:i2, j:j2) += avg_block;
+        Estimated(i:i2, j:j2) += ones(size(avg_block));
     end
 end
 
-J = uint8(J);
+J = uint8(round(J ./ Estimated));
 
 end
